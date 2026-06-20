@@ -8,7 +8,6 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 
-/* ===== СВЕТЛАЯ ТЕМА (по умолчанию) ===== */
 :root{
   --bg1:#e8f4f8;--bg2:#d4eaf3;--bg3:#c5e3ed;
   --blue:#5ba4cf;--cyan:#3dc8e8;--green:#5ddb9e;
@@ -18,8 +17,6 @@
   --input-bg:rgba(255,255,255,.7);--orb-opacity:.45;
   --shadow:rgba(100,180,210,.1);
 }
-
-/* ===== ТЁМНАЯ ТЕМА ===== */
 body.dark{
   --bg1:#0d1a2d;--bg2:#132a45;--bg3:#0f1f35;
   --blue:#5cc0ff;--cyan:#1ae8ff;--green:#4dffa0;
@@ -31,7 +28,12 @@ body.dark{
 }
 
 html{scroll-behavior:smooth}
-body{background:linear-gradient(180deg,var(--bg1) 0%,var(--bg2) 30%,var(--bg3) 60%,var(--bg2) 100%);color:var(--text);font-family:'Inter',sans-serif;overflow-x:hidden;min-height:100vh;position:relative;transition:background .5s,color .5s}
+body{
+  background:linear-gradient(180deg,var(--bg1) 0%,var(--bg2) 30%,var(--bg3) 60%,var(--bg2) 100%);
+  color:var(--text);font-family:'Inter',sans-serif;overflow-x:hidden;
+  min-height:100vh;position:relative;transition:background .5s,color .5s;
+  display:flex;flex-direction:column;align-items:center;
+}
 
 .bg-orb{position:fixed;border-radius:50%;pointer-events:none;z-index:0;filter:blur(80px);opacity:var(--orb-opacity);transition:opacity .5s}
 .bg-orb-1{width:500px;height:500px;background:radial-gradient(circle,rgba(150,210,240,.5),transparent);top:5%;left:-100px;animation:floatOrb1 18s ease-in-out infinite}
@@ -48,15 +50,24 @@ body{background:linear-gradient(180deg,var(--bg1) 0%,var(--bg2) 30%,var(--bg3) 6
 #sakura-canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none}
 
 /* ===== HEADER ===== */
-header{position:fixed;top:0;width:100%;z-index:100;padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between;background:var(--header-bg);backdrop-filter:blur(18px);border-bottom:1px solid var(--border);box-shadow:0 2px 20px var(--shadow);transition:background .5s,box-shadow .5s;flex-wrap:wrap;gap:.8rem}
+header{
+  position:fixed;top:0;left:0;width:100%;z-index:100;
+  padding:1rem 2rem;display:flex;align-items:center;justify-content:center;
+  background:var(--header-bg);backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--border);box-shadow:0 2px 20px var(--shadow);
+  transition:background .5s,box-shadow .5s;
+}
+.header-inner{
+  width:100%;max-width:1200px;display:flex;align-items:center;
+  justify-content:space-between;flex-wrap:wrap;gap:.8rem;
+}
 .logo{font-family:'Press Start 2P',monospace;font-size:13px;letter-spacing:2px}
 .logo-myd{background:linear-gradient(90deg,var(--blue),var(--cyan),var(--green));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-nav{display:flex;align-items:center;gap:2rem;flex-wrap:wrap}
+nav{display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap}
 nav a{color:var(--muted);text-decoration:none;font-size:.85rem;font-weight:500;transition:all .2s;position:relative}
 nav a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;background:linear-gradient(90deg,var(--blue),var(--cyan));transition:width .3s;border-radius:1px}
 nav a:hover{color:var(--cyan)}nav a:hover::after{width:100%}
 
-/* ===== ПЕРЕКЛЮЧАТЕЛЬ ТЕМЫ ===== */
 .theme-toggle{
   display:flex;align-items:center;gap:.5rem;cursor:pointer;
   background:var(--card);border:1.5px solid var(--border2);
@@ -66,8 +77,19 @@ nav a:hover{color:var(--cyan)}nav a:hover::after{width:100%}
 .theme-toggle:hover{background:var(--border);transform:scale(1.04)}
 .theme-toggle .icon{font-size:1rem}
 
+/* ===== MAIN CONTENT WRAPPER ===== */
+main{
+  width:100%;max-width:1200px;margin:0 auto;
+  display:flex;flex-direction:column;align-items:center;
+  position:relative;z-index:1;
+}
+
 /* ===== HERO ===== */
-#hero{position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2rem;z-index:1}
+#hero{
+  position:relative;min-height:100vh;width:100%;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:6rem 2rem 2rem;z-index:1;
+}
 .hero-badge{display:inline-block;border:1.5px solid var(--border2);color:var(--cyan);font-family:'Press Start 2P',monospace;font-size:9px;padding:.55rem 1.1rem;border-radius:4px;margin-bottom:2rem;letter-spacing:1px;background:var(--card);animation:badgepulse 2.5s ease-in-out infinite,badgeShine 3s ease-in-out infinite}
 @keyframes badgepulse{0%,100%{box-shadow:0 0 0 0 rgba(60,200,230,.3)}50%{box-shadow:0 0 0 16px rgba(60,200,230,0)}}
 @keyframes badgeShine{0%,100%{border-color:rgba(60,200,230,.4)}50%{border-color:rgba(60,200,230,.8)}}
@@ -94,11 +116,11 @@ h1.hero-title{font-family:'Press Start 2P',monospace;font-size:clamp(20px,4.5vw,
 .btn-map:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(240,168,186,.45)}
 
 /* ===== SECTIONS ===== */
-.section{position:relative;z-index:1;padding:5rem 2rem}
+.section{position:relative;z-index:1;padding:5rem 2rem;width:100%;display:flex;flex-direction:column;align-items:center}
 .section-title{font-family:'Press Start 2P',monospace;font-size:clamp(13px,2.2vw,20px);color:var(--text);text-align:center;margin-bottom:3rem;line-height:1.65}
 .g{background:linear-gradient(90deg,var(--blue),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 
-.stats-grid{max-width:900px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1.5rem}
+.stats-grid{max-width:900px;width:100%;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1.5rem;justify-content:center}
 .stat-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:2rem;text-align:center;position:relative;overflow:hidden;transition:all .3s;backdrop-filter:blur(12px);animation:cardFloat 6s ease-in-out infinite}
 .stat-card:nth-child(2){animation-delay:-2s}.stat-card:nth-child(3){animation-delay:-4s}
 @keyframes cardFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
@@ -112,41 +134,19 @@ h1.hero-title{font-family:'Press Start 2P',monospace;font-size:clamp(20px,4.5vw,
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
 @keyframes dotGlow{0%,100%{box-shadow:0 0 0 0 rgba(93,219,158,.5)}50%{box-shadow:0 0 12px 4px rgba(93,219,158,.3)}}
 
-/* ===== АНИМАЦИЯ ЗАГРУЗКИ: .-- -.- --. (кирки) ===== */
-.loading-container{
-  display:inline-flex;align-items:center;gap:6px;
-  font-family:'Press Start 2P',monospace;font-size:clamp(12px,2.5vw,18px);color:var(--muted);
-  height:44px;line-height:44px;
-}
+/* ===== АНИМАЦИЯ ЗАГРУЗКИ ===== */
+.loading-container{display:inline-flex;align-items:center;gap:6px;font-family:'Press Start 2P',monospace;font-size:clamp(12px,2.5vw,18px);color:var(--muted);height:44px;line-height:44px}
 .loading-word{animation:textPulse 1.2s ease-in-out infinite}
 @keyframes textPulse{0%,100%{opacity:.7}50%{opacity:1}}
-
-.pick-dot{
-  font-size:clamp(14px,3vw,20px);
-  display:inline-block;
-}
-/* .-- → кирка, кирка, пауза */
+.pick-dot{font-size:clamp(14px,3vw,20px);display:inline-block}
 .pick1{animation:seq1 1.5s ease-in-out infinite}
 .pick2{animation:seq2 1.5s ease-in-out infinite}
 .pick3{animation:seq3 1.5s ease-in-out infinite}
+@keyframes seq1{0%,10%{opacity:0;transform:scale(.5) rotate(-20deg)}20%,30%{opacity:1;transform:scale(1.1) rotate(10deg)}40%,100%{opacity:1;transform:scale(1) rotate(0)}}
+@keyframes seq2{0%,30%{opacity:0;transform:scale(.5) rotate(-20deg)}40%,50%{opacity:1;transform:scale(1.1) rotate(10deg)}60%,100%{opacity:1;transform:scale(1) rotate(0)}}
+@keyframes seq3{0%,60%{opacity:0;transform:scale(.5) rotate(-20deg)}70%,80%{opacity:1;transform:scale(1.1) rotate(10deg)}90%,100%{opacity:1;transform:scale(1) rotate(0)}}
 
-@keyframes seq1{
-  0%,10%{opacity:0;transform:scale(.5) rotate(-20deg)}
-  20%,30%{opacity:1;transform:scale(1.1) rotate(10deg)}
-  40%,100%{opacity:1;transform:scale(1) rotate(0)}
-}
-@keyframes seq2{
-  0%,30%{opacity:0;transform:scale(.5) rotate(-20deg)}
-  40%,50%{opacity:1;transform:scale(1.1) rotate(10deg)}
-  60%,100%{opacity:1;transform:scale(1) rotate(0)}
-}
-@keyframes seq3{
-  0%,60%{opacity:0;transform:scale(.5) rotate(-20deg)}
-  70%,80%{opacity:1;transform:scale(1.1) rotate(10deg)}
-  90%,100%{opacity:1;transform:scale(1) rotate(0)}
-}
-
-.ip-box{max-width:500px;margin:2rem auto 0;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.2rem 1.5rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;cursor:pointer;transition:all .3s;backdrop-filter:blur(12px);animation:ipGlow 3s ease-in-out infinite}
+.ip-box{max-width:500px;width:100%;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.2rem 1.5rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;cursor:pointer;transition:all .3s;backdrop-filter:blur(12px);animation:ipGlow 3s ease-in-out infinite}
 @keyframes ipGlow{0%,100%{box-shadow:0 0 0 0 rgba(60,200,230,.1)}50%{box-shadow:0 0 20px 4px rgba(60,200,230,.12)}}
 .ip-box:hover{border-color:var(--border2);box-shadow:0 8px 30px rgba(60,200,230,.18)!important;transform:translateY(-2px)}
 .ip-text{font-family:'Press Start 2P',monospace;font-size:11px;color:var(--text)}
@@ -159,7 +159,7 @@ h1.hero-title{font-family:'Press Start 2P',monospace;font-size:clamp(20px,4.5vw,
 .map-big-btn{display:inline-flex;align-items:center;gap:.8rem;padding:1.2rem 3rem;font-size:1.1rem;margin-top:1rem;animation:mapBtnPulse 3s ease-in-out infinite}
 @keyframes mapBtnPulse{0%,100%{box-shadow:0 4px 15px rgba(240,168,186,.3)}50%{box-shadow:0 8px 30px rgba(240,168,186,.5)}}
 
-.features-grid{max-width:950px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.5rem}
+.features-grid{max-width:950px;width:100%;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.5rem}
 .feature-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.75rem;transition:all .3s;backdrop-filter:blur(12px);position:relative;overflow:hidden}
 .feature-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(240,200,212,.4),transparent);opacity:0;transition:opacity .3s}
 .feature-card:hover{transform:translateY(-5px);border-color:var(--border2);box-shadow:0 12px 35px rgba(60,200,230,.12)}
@@ -182,7 +182,7 @@ h1.hero-title{font-family:'Press Start 2P',monospace;font-size:clamp(20px,4.5vw,
 .sakura-divider span:nth-child(5){animation-delay:-1.6s}
 @keyframes dividerFloat{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-8px) rotate(10deg)}}
 
-.plans-grid{max-width:960px;margin:0 auto 3rem;display:flex;gap:1.5rem;justify-content:center;flex-wrap:wrap}
+.plans-grid{max-width:960px;width:100%;display:flex;gap:1.5rem;justify-content:center;flex-wrap:wrap}
 .plan-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:2rem 1.5rem;text-align:center;transition:all .3s;backdrop-filter:blur(12px);position:relative;overflow:hidden;flex:1;min-width:220px;max-width:300px}
 .plan-card:hover{transform:translateY(-8px);border-color:var(--border2);box-shadow:0 16px 40px rgba(60,200,230,.15)}
 .plan-card.featured{border:2px solid rgba(60,200,230,.5);background:var(--card);animation:featuredGlow 3s ease-in-out infinite}
@@ -207,7 +207,7 @@ h1.hero-title{font-family:'Press Start 2P',monospace;font-size:clamp(20px,4.5vw,
 .plan-btn-grad{background:linear-gradient(135deg,var(--blue),var(--cyan),var(--green));color:#fff}
 .plan-btn-grad:hover{box-shadow:0 8px 28px rgba(60,200,230,.35);transform:translateY(-2px)}
 
-.pay-form-wrap{max-width:680px;margin:0 auto}
+.pay-form-wrap{max-width:680px;width:100%}
 .pay-form{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:2.5rem;backdrop-filter:blur(16px);position:relative;overflow:hidden}
 .pay-form::before{content:'';display:block;height:3px;background:linear-gradient(90deg,var(--sakura),var(--blue),var(--cyan),var(--green));border-radius:2px;margin-bottom:2rem}
 .pay-form-bloom{position:absolute;bottom:-30px;right:-30px;font-size:100px;opacity:.04;transform:rotate(-15px);pointer-events:none}
@@ -238,7 +238,7 @@ h1.hero-title{font-family:'Press Start 2P',monospace;font-size:clamp(20px,4.5vw,
 .about-inner{max-width:640px;margin:0 auto}
 .about-inner p{color:var(--muted);line-height:1.8;font-size:.95rem;margin-bottom:1.5rem}
 
-footer{position:relative;z-index:1;padding:3rem 2rem;text-align:center;border-top:1px solid var(--border);background:var(--footer-bg);transition:background .5s}
+footer{width:100%;padding:3rem 2rem;text-align:center;border-top:1px solid var(--border);background:var(--footer-bg);transition:background .5s;position:relative;z-index:1}
 footer p{color:var(--muted);font-size:.8rem;margin-top:.5rem}
 footer a{color:var(--cyan);text-decoration:none;transition:color .2s}footer a:hover{color:var(--blue)}
 
@@ -248,12 +248,16 @@ footer a{color:var(--cyan);text-decoration:none;transition:color .2s}footer a:ho
 ::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:var(--bg1)}::-webkit-scrollbar-thumb{background:rgba(100,180,210,.3);border-radius:3px}
 
 @media(max-width:620px){
-  header{padding:.75rem 1rem}nav{gap:1rem}
+  header{padding:.75rem 1rem}
+  .header-inner{justify-content:center;text-align:center}
+  nav{gap:1rem;justify-content:center}
   .form-row{grid-template-columns:1fr}
   .pay-form{padding:1.5rem}
   .hero-sakura-ring{width:300px;height:300px}
   .plans-grid{flex-direction:column;align-items:center}
   .plan-card{max-width:100%}
+  .stats-grid{grid-template-columns:1fr}
+  .ip-box{flex-direction:column;text-align:center}
 }
 </style>
 </head>
@@ -262,19 +266,22 @@ footer a{color:var(--cyan);text-decoration:none;transition:color .2s}footer a:ho
 <canvas id="sakura-canvas"></canvas>
 
 <header>
-  <div class="logo"><span class="logo-myd">MYD</span><span style="color:var(--blue)">.</span><span style="color:var(--blue)">SERVER</span></div>
-  <nav>
-    <a href="#online">Онлайн</a>
-    <a href="#map-section">Карта</a>
-    <a href="#payment">Пропуск</a>
-    <a href="https://t.me/myd_server" target="_blank">Telegram</a>
-    <div class="theme-toggle" onclick="toggleTheme()">
-      <span class="icon">☀️</span>
-      <span class="label">Тема</span>
-    </div>
-  </nav>
+  <div class="header-inner">
+    <div class="logo"><span class="logo-myd">MYD</span><span style="color:var(--blue)">.</span><span style="color:var(--blue)">SERVER</span></div>
+    <nav>
+      <a href="#online">Онлайн</a>
+      <a href="#map-section">Карта</a>
+      <a href="#payment">Пропуск</a>
+      <a href="https://t.me/myd_server" target="_blank">Telegram</a>
+      <div class="theme-toggle" onclick="toggleTheme()">
+        <span class="icon">☀️</span>
+        <span class="label">Тема</span>
+      </div>
+    </nav>
+  </div>
 </header>
 
+<main>
 <section id="hero">
   <div class="hero-sakura-ring"></div>
   <div class="hero-badge">🌸 VANILLA MINECRAFT 1.21.10+</div>
@@ -285,14 +292,7 @@ footer a{color:var(--cyan);text-decoration:none;transition:color .2s}footer a:ho
 
 <section id="online" class="section">
   <div class="stats-grid reveal">
-    <div class="stat-card"><div class="stat-label">Онлайн сейчас</div><div class="stat-val" id="online-display">
-      <div class="loading-container">
-        <span class="loading-word">загрузка</span>
-        <span class="pick-dot pick1">⛏</span>
-        <span class="pick-dot pick2">⛏</span>
-        <span class="pick-dot pick3">⛏</span>
-      </div>
-    </div></div>
+    <div class="stat-card"><div class="stat-label">Онлайн сейчас</div><div class="stat-val" id="online-display"><div class="loading-container"><span class="loading-word">загрузка</span><span class="pick-dot pick1">⛏</span><span class="pick-dot pick2">⛏</span><span class="pick-dot pick3">⛏</span></div></div></div>
     <div class="stat-card"><div class="stat-label">Версия</div><div class="stat-val gg">1.21.10</div></div>
     <div class="stat-card"><div class="stat-label">Режим</div><div class="stat-val" style="font-size:13px">VANILLA</div></div>
   </div>
@@ -355,6 +355,7 @@ footer a{color:var(--cyan);text-decoration:none;transition:color .2s}footer a:ho
     <p style="margin-top:2rem">Вопросы — в нашем <a href="https://t.me/myd_server" target="_blank" style="color:var(--cyan);font-weight:600">Telegram-канале</a>. 🌸</p>
   </div>
 </section>
+</main>
 
 <footer>
   <div style="font-family:'Press Start 2P',monospace;font-size:12px;letter-spacing:2px;margin-bottom:.75rem"><span style="background:linear-gradient(90deg,var(--blue),var(--cyan),var(--green));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">MYD</span><span style="color:var(--blue)">.</span><span style="color:var(--blue)">SERVER</span></div>
@@ -376,7 +377,6 @@ function toggleTheme(){
     localStorage.setItem('theme','light');
   }
 }
-// Загрузка темы
 (function(){
   const saved = localStorage.getItem('theme');
   if(saved === 'dark'){
@@ -412,7 +412,19 @@ async function checkOnline(){
 checkOnline();setInterval(checkOnline,30000);
 
 /* ===== COPY IP ===== */
-function copyIP(){navigator.clipboard.writeText('myd.goms.fun').then(()=>{['copy-btn','copy-btn2'].forEach(id=>{const b=document.getElementById(id);if(!b)return;const o=b.textContent;b.textContent='✅ Скопировано!';b.classList.add('copied');setTimeout(()=>{b.textContent=o;b.classList.remove('copied')},2000)})})}
+function copyIP(){
+  const text='myd.goms.fun';
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(showCopied).catch(()=>fallbackCopy(text))}
+  else{fallbackCopy(text)}
+}
+function fallbackCopy(text){
+  const ta=document.createElement('textarea');ta.value=text;ta.style.position='fixed';ta.style.left='-9999px';document.body.appendChild(ta);ta.focus();ta.select();
+  try{document.execCommand('copy');showCopied()}catch(e){alert('IP: '+text)}
+  document.body.removeChild(ta);
+}
+function showCopied(){
+  ['copy-btn','copy-btn2'].forEach(id=>{const b=document.getElementById(id);if(!b)return;const o=b.textContent;b.textContent='✅ Скопировано!';b.classList.add('copied');setTimeout(()=>{b.textContent=o;b.classList.remove('copied')},2000)});
+}
 
 /* ===== PAYMENT ===== */
 let selCoin='USDT';
